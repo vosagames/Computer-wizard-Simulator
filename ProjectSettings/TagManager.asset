@@ -5,6 +5,19 @@ TagManager:
   serializedVersion: 2
   tags:
   - RepairTable
+  - Cooler
+  - GPU
+  - CPU
+  - RAM1
+  - RAM2
+  - Power
+  - CoolerP
+  - GPUP
+  - CPUP
+  - RAM1P
+  - RAM2P
+  - PowerP
+  - Info
   layers:
   - Default
   - TransparentFX
