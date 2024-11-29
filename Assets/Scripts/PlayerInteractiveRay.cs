@@ -50,6 +50,10 @@ public class PlayerInteractiveRay : MonoBehaviour
             if(hit.collider.GetComponent<ComputerSettings>() && Computer == null)
             {
                 clueForE.SetActive(true);
+                if (Computer == null && Input.GetKeyDown(KeyCode.E))
+                {
+                    isGrab = false;
+                }
                 if (isGrab == false && hit.collider.GetComponent<ComputerSettings>().isRepairTable == false && Input.GetKeyDown(KeyCode.E))
                 {
                     isGrab = true;
@@ -95,6 +99,17 @@ public class PlayerInteractiveRay : MonoBehaviour
                 Computer.GetComponent<BoxCollider>().enabled = false;
                 Invoke("PlayerOff", 0.1f);
                 MoveVirtualCamera();
+            }
+            if (hit.collider.GetComponent<ReadyPC>() && Computer != null)
+            {
+                Debug.Log(clueForE);
+                clueForE.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    GameObject RPc = hit.collider.GetComponent<ReadyPC>().gameObject;
+                    RPc.GetComponent<ReadyPC>().CheckPC(Computer);
+                }
+
             }
         }
         else
