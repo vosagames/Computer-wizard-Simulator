@@ -8,6 +8,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
     [SerializeField] private GameObject cameraPlayer;
     [SerializeField] private GameObject thisDiagnostic;
     [SerializeField] private GameObject Player;
+    [SerializeField] private AudioSource GrabAudio, PutAudio;
 
     public GameObject _Computer;
 
@@ -29,6 +30,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
             {
                 if (hit.collider.CompareTag("GPU"))
                 {
+                    GrabAudio.Play();
                     _Computer.GetComponent<ComputerSettings>().GPU = false;
                     _Computer.GetComponent<ComputerSettings>().PCstat();
                     GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
@@ -36,6 +38,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
                 }
                 if (hit.collider.CompareTag("CPU"))
                 {
+                    GrabAudio.Play();
                     _Computer.GetComponent<ComputerSettings>().CPU = false;
                     _Computer.GetComponent<ComputerSettings>().PCstat();
                     GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
@@ -43,6 +46,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
                 }
                 if (hit.collider.CompareTag("RAM1"))
                 {
+                    GrabAudio.Play();
                     _Computer.GetComponent<ComputerSettings>().RAM1 = false;
                     _Computer.GetComponent<ComputerSettings>().PCstat();
                     GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
@@ -50,6 +54,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
                 }
                 if (hit.collider.CompareTag("RAM2"))
                 {
+                    GrabAudio.Play();
                     _Computer.GetComponent<ComputerSettings>().RAM2 = false;
                     GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
                     invetorySystem.GetComponent<InventorySystem>().addItem(1);
@@ -57,6 +62,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
                 }
                 if (hit.collider.CompareTag("Power"))
                 {
+                    GrabAudio.Play();
                     _Computer.GetComponent<ComputerSettings>().Power = false;
                     _Computer.GetComponent<ComputerSettings>().PCstat();
                     GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
@@ -64,6 +70,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
                 }
                 if (hit.collider.CompareTag("Cooler"))
                 {
+                    GrabAudio.Play();
                     _Computer.GetComponent<ComputerSettings>().Cooler = false;
                     _Computer.GetComponent<ComputerSettings>().PCstat();
                     GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
@@ -79,6 +86,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
                 {
                     if (items[i].GetComponent<item>().select == true && items[i].GetComponent<item>().itemID == 3)
                     {
+                        PutAudio.Play();
                         Remover(3);
                         _Computer.GetComponent<ComputerSettings>().GPU = true;
                         _Computer.GetComponent<ComputerSettings>().PCstat();
@@ -92,6 +100,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
                 {
                     if (items[i].GetComponent<item>().select == true && items[i].GetComponent<item>().itemID == 2)
                     {
+                        PutAudio.Play();
                         Remover(2);
                         _Computer.GetComponent<ComputerSettings>().CPU = true;
                         _Computer.GetComponent<ComputerSettings>().PCstat();
@@ -105,6 +114,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
                 {
                     if (items[i].GetComponent<item>().select == true && items[i].GetComponent<item>().itemID == 1)
                     {
+                        PutAudio.Play();
                         Remover(1);
                         _Computer.GetComponent<ComputerSettings>().RAM1 = true;
                         _Computer.GetComponent<ComputerSettings>().PCstat();
@@ -118,6 +128,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
                 {
                     if (items[i].GetComponent<item>().select == true && items[i].GetComponent<item>().itemID == 1)
                     {
+                        PutAudio.Play();
                         Remover(1);
                         _Computer.GetComponent<ComputerSettings>().RAM2 = true;
                         _Computer.GetComponent<ComputerSettings>().PCstat();
@@ -131,6 +142,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
                 {
                     if (items[i].GetComponent<item>().select == true && items[i].GetComponent<item>().itemID == 4)
                     {
+                        PutAudio.Play();
                         Remover(4);
                         _Computer.GetComponent<ComputerSettings>().Power = true;
                         _Computer.GetComponent<ComputerSettings>().PCstat();
@@ -144,6 +156,7 @@ public class DiagnosticInteractiveRay : MonoBehaviour
                 {
                     if (items[i].GetComponent<item>().select == true && items[i].GetComponent<item>().itemID == 5)
                     {
+                        PutAudio.Play();
                         Remover(5);
                         _Computer.GetComponent<ComputerSettings>().Cooler = true;
                         _Computer.GetComponent<ComputerSettings>().PCstat();

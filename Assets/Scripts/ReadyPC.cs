@@ -7,6 +7,7 @@ public class ReadyPC : MonoBehaviour
 {
     [SerializeField] private TMP_Text readyPCcount;
     [SerializeField] GameObject ErrorMesseage, ReadyMesseage;
+    [SerializeField] private AudioSource ReadyAudio, ErrorAudio;
 
     private int Counter;
 
@@ -17,11 +18,13 @@ public class ReadyPC : MonoBehaviour
             UpdateCountPC();
             Destroy(Computer);
             ReadyMesseage.SetActive(true);
+            ReadyAudio.Play();
             Invoke("ReadyHide", 2f);
         }
         else
         {
             ErrorMesseage.SetActive(true);
+            ErrorAudio.Play();
             Invoke("ErrorHide", 2f);
         }
     }

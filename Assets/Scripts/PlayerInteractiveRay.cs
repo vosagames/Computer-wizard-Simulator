@@ -11,6 +11,7 @@ public class PlayerInteractiveRay : MonoBehaviour
     [SerializeField] private GameObject _Camera;
     [SerializeField] private GameObject virtualCamera;
     [SerializeField] private GameObject infoCanvas;
+    [SerializeField] private AudioSource GrabAudio, PutAudio, InfoAudio;
 
     private bool InfCan;
 
@@ -36,6 +37,7 @@ public class PlayerInteractiveRay : MonoBehaviour
                 clueForE.SetActive(true);
                 if (hit.collider.gameObject.CompareTag("Info") && Input.GetKeyDown(KeyCode.E))
                 {
+                    InfoAudio.Play();
                     GameObject player = FindObjectOfType<FirstPersonController>().gameObject;
                     player.GetComponent<FirstPersonController>().enabled = false;
                     ShowC();
@@ -56,6 +58,7 @@ public class PlayerInteractiveRay : MonoBehaviour
                 }
                 if (isGrab == false && hit.collider.GetComponent<ComputerSettings>().isRepairTable == false && Input.GetKeyDown(KeyCode.E))
                 {
+                    GrabAudio.Play();
                     isGrab = true;
                     Computer = hit.collider.GetComponent<ComputerSettings>().gameObject;
                     GameObject table = FindObjectOfType<TableControl>().gameObject;
@@ -71,6 +74,7 @@ public class PlayerInteractiveRay : MonoBehaviour
                 clueForE.SetActive(true);
                 if (isGrab == true && hit.collider.CompareTag("RepairTable") && Input.GetKeyDown(KeyCode.E))
                 {
+                    PutAudio.Play();
                     GameObject repairTable = hit.collider.gameObject;
                     Computer.GetComponent<ComputerSettings>().isRepairTable = true;
                     Computer.GetComponent<BoxCollider>().enabled = true;
@@ -86,6 +90,7 @@ public class PlayerInteractiveRay : MonoBehaviour
                 clueForE.SetActive(true);
                 if (isGrab == true && hit.collider.GetComponent<TableControl>() && Input.GetKeyDown(KeyCode.E))
                 {
+                    PutAudio.Play();
                     GameObject table = hit.collider.GetComponent<TableControl>().gameObject;
                     table.GetComponent<TableControl>().Take(Computer);
                     Computer.GetComponent<BoxCollider>().enabled = true;
