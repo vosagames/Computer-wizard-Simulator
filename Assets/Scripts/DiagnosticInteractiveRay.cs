@@ -200,4 +200,14 @@ public class DiagnosticInteractiveRay : MonoBehaviour
         GameObject _invetorySystemRemover = FindObjectOfType<InventorySystem>().gameObject;
         _invetorySystemRemover.GetComponent<InventorySystem>().removeItem(id);
     }
+    public void DeleteAllItem()
+    {
+        var items = Object.FindObjectsOfType<item>();
+        for (int i = 0; i < items.Length; i++)
+        {
+            GameObject _invetorySystemRemover = FindObjectOfType<InventorySystem>().gameObject;
+            Destroy(items[i].gameObject);
+            _invetorySystemRemover.GetComponent<InventorySystem>().items.Clear();
+        }
+    }
 }

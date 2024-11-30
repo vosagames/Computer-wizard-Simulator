@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ReadyPC : MonoBehaviour
 {
@@ -40,11 +41,12 @@ public class ReadyPC : MonoBehaviour
         readyPCcount.text = $"Собрано компьютеров: {Counter}/3";
         if(Counter == 3)
         {
-            Finish();
+            Invoke("Finish", 3.5f);
         }
     }
     private void Finish()
     {
-
+        SceneManager.LoadScene(1);
     }
+   
 }

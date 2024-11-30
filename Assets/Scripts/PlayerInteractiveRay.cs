@@ -11,7 +11,8 @@ public class PlayerInteractiveRay : MonoBehaviour
     [SerializeField] private GameObject _Camera;
     [SerializeField] private GameObject virtualCamera;
     [SerializeField] private GameObject infoCanvas;
-    [SerializeField] private AudioSource GrabAudio, PutAudio, InfoAudio;
+    [SerializeField] private AudioSource GrabAudio, PutAudio, InfoAudio, ErrorAudio;
+    [SerializeField] private GameObject ErrorMessage, GetMessage;
 
     private bool InfCan;
 
@@ -98,6 +99,43 @@ public class PlayerInteractiveRay : MonoBehaviour
                     isGrab = false; 
                 }
             }
+            if (isGrab == false && Computer == null)
+            {
+                if (hit.collider.gameObject.CompareTag("GPU") || hit.collider.CompareTag("CPU") || hit.collider.CompareTag("RAM1") || hit.collider.CompareTag("Power") || hit.collider.CompareTag("Cooler"))
+                {
+                    clueForE.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.E) && hit.collider.CompareTag("Cooler"))
+                    {
+                        GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
+                        invetorySystem.GetComponent<InventorySystem>().addItem(5);
+                        GetMessageAndError();
+                    }
+                    if (Input.GetKeyDown(KeyCode.E) && hit.collider.CompareTag("GPU"))
+                    {
+                        GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
+                        invetorySystem.GetComponent<InventorySystem>().addItem(3);
+                        GetMessageAndError();
+                    }
+                    if (Input.GetKeyDown(KeyCode.E) && hit.collider.CompareTag("CPU"))
+                    {
+                        GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
+                        invetorySystem.GetComponent<InventorySystem>().addItem(2);
+                        GetMessageAndError();
+                    }
+                    if (Input.GetKeyDown(KeyCode.E) && hit.collider.CompareTag("RAM1"))
+                    {
+                        GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
+                        invetorySystem.GetComponent<InventorySystem>().addItem(1);
+                        GetMessageAndError();
+                    }
+                    if (Input.GetKeyDown(KeyCode.E) && hit.collider.CompareTag("Power"))
+                    {
+                        GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
+                        invetorySystem.GetComponent<InventorySystem>().addItem(4);
+                        GetMessageAndError();
+                    }
+                }
+            }
             if (isGrab == false && hit.collider.GetComponent<ComputerSettings>().isRepairTable == true && Input.GetKeyDown(KeyCode.E)) 
             {
                 Computer = hit.collider.gameObject;
@@ -116,6 +154,7 @@ public class PlayerInteractiveRay : MonoBehaviour
                 }
 
             }
+           
         }
         else
         {
@@ -159,4 +198,22 @@ public class PlayerInteractiveRay : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+    private void GetMessageAndError()
+    {
+        GameObject invetorySystem = FindObjectOfType<InventorySystem>().gameObject;
+        if (invetorySystem.GetComponent<InventorySystem>().items.Count != 6)
+        {
+            GrabAudio.Play();
+            GetMessage.SetActive(true);
+            Invoke("GetHide", 0.4f);
+        }
+        else
+        {
+            ErrorAudio.Play();  
+            ErrorMessage.SetActive(true);
+            Invoke("ErrorHide", 2f);
+        }
+    }
+    private void ErrorHide() => ErrorMessage.SetActive(false);
+    private void GetHide() => GetMessage.SetActive(false);
 }
